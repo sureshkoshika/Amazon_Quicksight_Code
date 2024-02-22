@@ -1,0 +1,41 @@
+#1 Adding date to provided date in date filter by creating parameters
+
+sum({Event_Actuals_rollover_cal1})-
+
+sum({Event_Actuals_rollover_cal2})/distinct_countIf({ship_day},{ship_day} >= addDateTime(2, 'DD', ${shipdateend}) AND {ship_day} <= addDateTime(4, 'DD', ${shipdateend}))
+
+
+#2 
+
+sum({Event_Actuals})+
+sum({Event_Actuals_rollover_cal1})-
+
+sum({Event_Actuals_rollover_cal2})/distinct_countIf({ship_day},{ship_day} >= addDateTime(2, 'DD', ${shipdateend}) AND {ship_day} <= addDateTime(4, 'DD', ${shipdateend}))
+
+#3
+
+(sum({Event_Actuals})+
+sum({Event_Actuals_rollover_cal1})-
+
+sum({Event_Actuals_rollover_cal2})/distinct_countIf({ship_day},{ship_day} >= addDateTime(2, 'DD', ${shipdateend}) AND {ship_day} <= addDateTime(4, 'DD', ${shipdateend})))
+/distinct_countIf({ship_day},{ship_day} >= ${Shipdatestart} AND {ship_day} <= ${shipdateend})
+
+#4
+
+Ordering the the alphabetic values in specific order
+
+ifelse(channel='ACHANNEL', 1,
+       channel='FCHANNEL',2,
+       channel='BCHANNEL',3,0)
+
+Using Sort options and sort by above created CAL. filed
+
+#5  Image1 use this filter option to create % of parent totals
+#6  
+Using parameters to display the values of customised date range in controls
+
+- ifelse({ship_day}>= ${Shipdatestart} AND {ship_day}<=${shipdateend},nwd,null)
+
+- sum({BAU Actuals})/distinct_countIf({ship_day},{ship_day} >= ${BAUstartdate} AND {ship_day} <= ${BAUenddate}) == AVergae of above
+
+
